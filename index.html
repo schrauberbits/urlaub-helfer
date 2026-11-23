@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urlaub-Helfer – Wie viele Urlaubstage stehen mir zu? Resturlaub, Teilzeit, Jobwechsel</title>
+<meta name="description" content="Wie viele Urlaubstage stehen mir dieses Jahr zu – bei neuem Job, Kündigung, Teilzeit oder Minijob? Verfällt mein Resturlaub am 31.12.? Wie viel Geld bekomme ich für offene Tage? Nachgerechnet nach Bundesurlaubsgesetz.">
+<style>
+:root{--bg:#f3f6f6;--card:#fff;--ink:#16201f;--muted:#5d6968;--line:#dbe3e2;--soft:#e9efee;
+--accent:#0f6f73;--accent-ink:#fff;--accent-soft:#dcefee;--ok:#2d6e3a;--ok-soft:#e3f0e4;--warn:#9a5a00;--warn-soft:#fbefd9}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1414;--card:#182020;--ink:#e8eeee;--muted:#9fb0ae;--line:#2c3938;--soft:#202a29;
+--accent:#6fd0d3;--accent-ink:#062223;--accent-soft:#163233;--ok:#86c98f;--ok-soft:#1d321f;--warn:#e8b15d;--warn-soft:#382c17}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.brand{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:6px;cursor:pointer;background:none;border:0;color:var(--ink);font-family:inherit;padding:0}
+.brand span{font-size:1.25rem}
+.back{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:6px 0}
+h1{font-size:1.6rem;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 14px}
+.sub{color:var(--muted);margin:0 0 20px}
+.step{font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+.qlist{display:flex;flex-direction:column;gap:10px}
+.q{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;font:inherit;color:inherit;cursor:pointer;text-decoration:none}
+.q:active,.pill:active{transform:scale(.98)}
+.q .ic{flex:0 0 46px;height:46px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.q b{display:block;font-size:1.05rem}
+.q span{display:block;color:var(--muted);font-size:.88rem}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 15px;font:inherit;font-size:.93rem;cursor:pointer;min-height:44px}
+.pill.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.field{display:block}
+.field span{display:block;font-size:.82rem;color:var(--muted);margin-bottom:4px;min-height:2.3em}
+input[type=number],input[type=date],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;height:48px;width:100%}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.answer{margin-top:20px;border-radius:18px;padding:18px;background:var(--accent-soft)}
+.answer.ok{background:var(--ok-soft)}.answer.warn{background:var(--warn-soft)}
+.answer .lbl{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.answer .say{font-size:1.28rem;font-weight:700;line-height:1.3;margin:6px 0 8px}
+.answer .more{font-size:.95rem}
+.list{margin:12px 0 0;padding:0;list-style:none;border-top:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);font-size:.95rem}
+.list li b{white-space:nowrap}
+.tips{margin:10px 0 0;padding-left:20px;font-size:.92rem}
+.tips li{margin:4px 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;min-height:46px;text-decoration:none;display:inline-flex;align-items:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.msg{font-size:.88rem;color:var(--ok);align-self:center}
+.formula{font-size:.83rem;color:var(--muted);margin-top:12px;line-height:1.45}
+.hint{font-size:.85rem;color:var(--muted);margin:6px 0 0}
+.mail{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:.9rem;margin-top:10px}
+details.fine{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+details.fine summary{cursor:pointer;color:var(--accent);font-weight:600}
+.hide{display:none!important}
+footer{margin-top:28px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.5}
+footer a{color:var(--accent)}
+</style>
+<script data-goatcounter="https://schrauberbits.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="brand" id="home" aria-label="Zur Startseite"><span>🏖️</span>Urlaub-Helfer</button>
+    <button class="back hide" id="back">← Andere Frage</button>
+  </div>
+  <main id="app"></main>
+  <footer>Gesetzlicher Rahmen nach Bundesurlaubsgesetz, Jugendarbeitsschutzgesetz und SGB IX, Stand November 2026. Tarif- oder Arbeitsvertrag können mehr Urlaub regeln. Keine Rechtsberatung – im Streit helfen Betriebsrat, Gewerkschaft oder eine Fachanwaltskanzlei.<br>Kostenlos, ohne Anmeldung, ohne Werbung – ein Hobbyprojekt, mit KI-Hilfe erstellt. Deine Eingaben bleiben auf deinem Gerät.<br>Mehr Helfer: <a href="https://schrauberbits.github.io/watt-helfer/">Watt-Helfer</a> · <a href="https://schrauberbits.github.io/heiz-helfer/">Heiz-Helfer</a> · <a href="https://schrauberbits.github.io/pc-helfer/">PC-Helfer</a> · <a href="https://schrauberbits.github.io/festessen-helfer/">Festessen-Helfer</a></footer>
+</div>
+
+<script>
+// ================= Grundlagen =================
+const app=document.getElementById('app');
+const num=v=>{const n=parseFloat(String(v).replace(',','.'));return isFinite(n)?n:0};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+// Tage: ganze Zahlen ohne Nachkommastellen, sonst bis zu 2 Stellen
+const tg=x=>{const r=Math.round(x*100)/100;return r.toLocaleString('de-DE',{maximumFractionDigits:2});};
+const tgT=x=>tg(x)+(Math.abs(x)===1?' Tag':' Tage');
+const eur=x=>x.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const HEUTE=new Date(); const JAHR=HEUTE.getFullYear();
+
+// ---------- Zählen: ein Ereignis, sobald der Besucher selbst einen Wert ändert ----------
+const REF=((new URLSearchParams(location.search).get('ref')||'ohne').replace(/[^a-z0-9_-]/gi,'').slice(0,40))||'ohne';
+let genutzt=false;
+function senden(path,title,versuch){
+  try{ if(window.goatcounter&&window.goatcounter.count){ window.goatcounter.count({path,title,event:true}); return; } }catch(e){ return; }
+  if(versuch<40) setTimeout(()=>senden(path,title,versuch+1),250);
+}
+function nutzung(e){
+  if(genutzt||!e.isTrusted) return;
+  const t=e.target; if(!(t instanceof Element)) return;
+  if(!(t.matches('input,select')||t.closest('.pill'))) return;
+  if(e.type==='click'&&t.matches('input,select')) return; // nur Antippen eines Feldes zählt nicht
+  genutzt=true; senden('urlaub-nutzung--'+REF,'Urlaub-Helfer: Wert geändert ('+REF+')',0);
+}
+['input','change','click'].forEach(ev=>app.addEventListener(ev,nutzung,true));
+
+// ---------- Werte über den Hash: #bereich?wert=… ----------
+function hashTeile(){ const h=location.hash.slice(1), i=h.indexOf('?'); return {seite:i<0?h:h.slice(0,i), p:new URLSearchParams(i<0?'':h.slice(i+1))}; }
+const STANDARD=new Map();
+function vorbelegen(S,p){ if(!STANDARD.has(S)) STANDARD.set(S,Object.assign({},S));
+  if([...p.keys()].some(k=>k in S)) Object.assign(S,STANDARD.get(S));
+  for(const k of Object.keys(S)){ if(!p.has(k)) continue; const v=p.get(k); S[k]=typeof S[k]==='number'?num(v):v; } }
+function hashSetzen(seite,S){ const q=new URLSearchParams(); for(const [k,v] of Object.entries(S)) q.set(k,v); history.replaceState(null,'',location.pathname+location.search+'#'+seite+'?'+q.toString()); }
+function teilLink(seite,S){ const q=new URLSearchParams(); for(const [k,v] of Object.entries(S)) q.set(k,v); return location.origin+location.pathname+'?ref=geteilt#'+seite+'?'+q.toString(); }
+
+// ---------- Datum ----------
+const istDatum=s=>/^\d{4}-\d{2}-\d{2}$/.test(s||'');
+const dat=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+const tagImMonat=(y,m)=>new Date(y,m+1,0).getDate(); // m 0-basiert
+const dTxt=d=>d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();
+// Ende einer Frist von k Monaten ab Beginn (§§ 187 Abs. 2, 188 BGB): Tag vor dem gleichen Datum k Monate später
+function fristEnde(beginn,k){
+  const y=beginn.getFullYear(), m=beginn.getMonth()+k, d=beginn.getDate();
+  const ty=y+Math.floor(m/12), tm=((m%12)+12)%12;
+  if(d===1) return new Date(ty,tm,0);
+  return new Date(ty,tm,Math.min(d-1,tagImMonat(ty,tm)));
+}
+// volle Monate des Bestehens zwischen a und b (b einschließlich)
+function volleMonate(a,b){ let k=0; while(k<12&&fristEnde(a,k+1)<=b) k++; return k; }
+// § 5 Abs. 2 BUrlG: Bruchteile ab einem halben Tag aufrunden, kleinere bleiben als Bruchteil bestehen
+const runden5=x=>{const f=x-Math.floor(x);return f>=0.5-1e-9?Math.ceil(x):Math.round(x*100)/100;};
+
+// ---------- Bausteine ----------
+const h=html=>{app.innerHTML=html;window.scrollTo(0,0)};
+const pills=(id,list,sel)=>`<div class="pills" id="${id}">${list.map(p=>`<button class="pill${String(p[0])===String(sel)?' on':''}" data-v="${p[0]}">${p[1]}</button>`).join('')}</div>`;
+function pillGroup(id,cb){document.getElementById(id).addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b)return;b.parentElement.querySelectorAll('.pill').forEach(x=>x.classList.toggle('on',x===b));cb(b.dataset.v);});}
+const feld=(id,label,typ,val,extra)=>`<label class="field"><span>${label}</span><input type="${typ}" id="${id}" value="${esc(val)}" ${extra||''}></label>`;
+const liste=rows=>`<ul class="list">${rows.map(r=>`<li><span>${r[0]}</span><b>${r[1]}</b></li>`).join('')}</ul>`;
+function antwortBox(cls,label,say,more,inhalt,tips,copyText,formel,weiter){
+  return `<div class="answer ${cls}"><div class="lbl">${label}</div><div class="say">${say}</div>${more?`<div class="more">${more}</div>`:''}
+  ${inhalt||''}
+  ${tips&&tips.length?`<ul class="tips">${tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:''}
+  ${formel?`<div class="formula">${formel}</div>`:''}
+  <div class="actions">${weiter||''}<button class="btn" data-share>Ergebnis teilen</button><button class="btn ghost" data-copy>Als Text kopieren</button><span class="msg" data-msg></span></div>
+  <textarea class="hide" data-text>${esc(copyText)}</textarea></div>`;
+}
+let aktuell={seite:'',S:null,titel:''};
+async function kopieren(text,el,ok){ try{await navigator.clipboard.writeText(text);el.textContent=ok||'Kopiert ✓';}catch(e){el.textContent='Bitte Text markieren und kopieren.';} setTimeout(()=>{el.textContent=''},3000); }
+app.addEventListener('click',async e=>{
+  const m=e.target.closest('[data-mail]'); if(m){ const box=m.closest('.answer'); return kopieren(box.querySelector('.mail').textContent,box.querySelector('[data-msg]'),'Mail-Text kopiert ✓'); }
+  const c=e.target.closest('[data-copy]'), s=e.target.closest('[data-share]'); if(!c&&!s) return;
+  const box=e.target.closest('.answer'), msg=box.querySelector('[data-msg]'), text=box.querySelector('[data-text]').value;
+  if(c) return kopieren(text,msg);
+  const url=teilLink(aktuell.seite,aktuell.S);
+  if(navigator.share){ try{ await navigator.share({title:aktuell.titel,text:text+'\n\nZum Nachrechnen mit meinen Werten:',url}); return; }catch(err){ if(err&&err.name==='AbortError') return; } }
+  kopieren(text+'\n\nZum Nachrechnen mit meinen Werten: '+url,msg,'Text und Link kopiert ✓');
+});
+app.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b) location.hash=b.dataset.go;});
+
+// ================= Startseite =================
+const FRAGEN=[
+ ['anspruch','📅','Wie viele Urlaubstage stehen mir dieses Jahr zu?','Neuer Job, Kündigung, Azubi unter 18, Schwerbehinderung – mit Resturlaub'],
+ ['anspruch?tage=3','⏱️','Urlaubstage bei Teilzeit oder Minijob','Vollzeit-Urlaub auf deine Arbeitstage umrechnen'],
+ ['rest','⏳','Verfällt mein Resturlaub am 31. Dezember?','Mit Frist, Ausnahmen und Mail-Vorlage an den Chef'],
+ ['geld','💶','Wie viel Geld bekomme ich für offenen Urlaub?','Urlaubsabgeltung beim Jobende ausrechnen']
+];
+function start(){
+  h(`<h1>Was willst du wissen?</h1><p class="sub">Tippe deine Frage an – du bekommst die Zahl für deinen Fall und siehst, wie sie zustande kommt.</p>
+  <div class="qlist">${FRAGEN.map(f=>`<button class="q" data-go="${f[0]}"><span class="ic">${f[1]}</span><span><b>${f[2]}</b><span>${f[3]}</span></span></button>`).join('')}</div>`);
+}
+
+// ================= 1) Urlaubsanspruch =================
+const ALTER=[['erw','18 oder älter'],['17','17'],['16','16'],['15','15 oder jünger']];
+const WERKTAGE={erw:24,'17':25,'16':27,'15':30}; // gesetzlicher Mindesturlaub in Werktagen (BUrlG § 3, JArbSchG § 19)
+const A={jahr:JAHR,urlaub:25,basis:5,tage:5,von:'',bis:'',alter:'erw',sb:0,zwoelf:0,vorher:0,genommen:0,uebertrag:0};
+function anspruch(p){
+  vorbelegen(A,p);
+  if(!WERKTAGE[A.alter]) A.alter='erw';
+  h(`<h2>Wie viele Urlaubstage stehen mir zu?</h2>
+  <div class="fields">
+   ${feld('aj','Urlaubsjahr','number',A.jahr,'min="2000" max="2100" inputmode="numeric"')}
+   ${feld('at','Deine Arbeitstage pro Woche','number',A.tage,'min="0.5" max="6" step="0.5" inputmode="decimal"')}
+   ${feld('au','Urlaubstage pro Jahr laut Vertrag (0 = weiß nicht)','number',A.urlaub,'min="0" max="60" step="0.5" inputmode="decimal"')}
+   ${feld('ab','… gerechnet für Tage pro Woche','number',A.basis,'min="1" max="6" step="0.5" inputmode="decimal"')}
+   ${feld('av','Beginn beim Arbeitgeber (leer = schon länger da)','date',A.von)}
+   ${feld('ae','Letzter Arbeitstag (leer = bleibt)','date',A.bis)}
+  </div>
+  <p class="hint">Steht im Vertrag z. B. „30 Tage bei 5-Tage-Woche“ und du arbeitest 3 Tage, rechnet der Helfer das um.</p>
+  <div class="step">Alter am 1. Januar des Urlaubsjahres</div>${pills('aa',ALTER,A.alter)}
+  <div class="step">Schwerbehindert (GdB ab 50)?</div>${pills('as',[[0,'Nein'],[1,'Ja']],A.sb)}
+  <details class="fine" ${A.vorher||A.genommen||A.uebertrag||A.zwoelf?'open':''}><summary>Schon genommen, Vorjahr, früherer Arbeitgeber</summary>
+  <div class="fields">
+   ${feld('ag','Dieses Jahr schon genommen oder fest geplant','number',A.genommen,'min="0" max="100" step="0.5" inputmode="decimal"')}
+   ${feld('ar','Aus dem Vorjahr übertragen','number',A.uebertrag,'min="0" max="100" step="0.5" inputmode="decimal"')}
+   ${feld('ax','Dieses Jahr beim früheren Arbeitgeber genommen oder ausbezahlt','number',A.vorher,'min="0" max="100" step="0.5" inputmode="decimal"')}
+  </div>
+  <div class="step">Steht im Vertrag, dass der Urlaub im Ein- oder Austrittsjahr anteilig gekürzt wird?</div>${pills('az',[[0,'Nein / weiß nicht'],[1,'Ja']],A.zwoelf)}
+  </details>
+  <div id="ares"></div>`);
+  const ids={aj:'jahr',at:'tage',au:'urlaub',ab:'basis',av:'von',ae:'bis',ag:'genommen',ar:'uebertrag',ax:'vorher'};
+  const upd=()=>{for(const [id,k] of Object.entries(ids)){const el=document.getElementById(id);A[k]=typeof A[k]==='number'?num(el.value):el.value;} aupd();};
+  Object.keys(ids).forEach(id=>document.getElementById(id).addEventListener('input',upd));
+  pillGroup('aa',v=>{A.alter=v;aupd()}); pillGroup('as',v=>{A.sb=num(v);aupd()}); pillGroup('az',v=>{A.zwoelf=num(v);aupd()});
+  aupd();
+}
+function rechneAnspruch(S){
+  const jahr=Math.round(clamp(S.jahr||JAHR,2000,2100)), n=clamp(S.tage||5,0.5,6), basis=clamp(S.basis||5,1,6);
+  const j1=new Date(jahr,0,1), j31=new Date(jahr,11,31), h30=new Date(jahr,5,30);
+  const von=istDatum(S.von)?dat(S.von):null, bis=istDatum(S.bis)?dat(S.bis):null;
+  if(von&&von>j31) return {fehler:'Der Beginn liegt nach dem Urlaubsjahr '+jahr+'.'};
+  if(bis&&bis<j1) return {fehler:'Der letzte Arbeitstag liegt vor dem Urlaubsjahr '+jahr+'.'};
+  if(von&&bis&&bis<von) return {fehler:'Der letzte Arbeitstag liegt vor dem Beginn.'};
+  const W=WERKTAGE[S.alter]||24;
+  const L=W*n/6;                                   // gesetzlicher Mindesturlaub in deinen Arbeitstagen
+  const V=S.urlaub>0?S.urlaub*n/basis:0;           // Vertrag, umgerechnet auf deine Arbeitstage
+  const J=Math.max(V,L);                           // voller Jahresurlaub
+  const zVoll=S.sb?n:0;                            // Zusatzurlaub Schwerbehinderung: eine Arbeitswoche
+  const a=von&&von>j1?von:j1, b=bis&&bis<j31?bis:j31;
+  const m=volleMonate(a,b);
+  const wz=von?fristEnde(von,6):null;
+  const wzErfuellt=!von||wz<=b;
+  const teilGrund=!wzErfuellt?(bis&&bis<wz?'b':'a'):(bis&&bis<=h30?'c':'');
+  const schritte=[]; let grund, faktor=1;
+  schritte.push(['Gesetzlicher Mindesturlaub bei '+tg(n)+'-Tage-Woche'+(S.alter!=='erw'?' (Jugendliche)':''),tgT(L)]);
+  if(V>0) schritte.push(['Dein Vertrag'+(basis!==n?' ('+tg(S.urlaub)+' bei '+tg(basis)+'-Tage-Woche, umgerechnet)':''),tgT(V)]);
+  let G, Z;
+  if(teilGrund){
+    faktor=m/12; G=runden5(J*faktor); Z=runden5(zVoll*faktor);
+    grund=teilGrund==='a'?`Die Wartezeit von 6 Monaten ist erst am ${dTxt(wz)} um – also nicht mehr in ${jahr}. Für ${jahr} gibt es deshalb ein Zwölftel je vollem Monat (§ 5 Abs. 1 a BUrlG): ${m} ${m===1?'Monat':'Monate'}.`
+      :teilGrund==='b'?`Du gehst vor Ende der 6-monatigen Wartezeit (${dTxt(wz)}). Deshalb ein Zwölftel je vollem Monat (§ 5 Abs. 1 b BUrlG): ${m} ${m===1?'Monat':'Monate'}.`
+      :`Du gehst in der ersten Jahreshälfte. Deshalb ein Zwölftel je vollem Monat (§ 5 Abs. 1 c BUrlG): ${m} ${m===1?'Monat':'Monate'}.`;
+    schritte.push(['Anteilig '+m+'/12',tgT(G)]);
+  }else{
+    const teilJahr=m<12;
+    if(S.zwoelf&&teilJahr&&J>L){ G=Math.max(runden5(J*m/12),L); faktor=m/12;
+      grund=`Die Wartezeit ist erfüllt${von&&wz>=j1?' (am '+dTxt(wz)+')':''}, deshalb steht dir mindestens der volle gesetzliche Urlaub zu (§ 4 BUrlG). Dein Vertrag kürzt nur den Urlaub darüber anteilig (${m}/12 = ${tg(J*m/12)} Tage) – den gesetzlichen Mindesturlaub darf er nicht unterschreiten.`;
+    }else{ G=J;
+      grund=teilJahr?`Die 6-monatige Wartezeit ist erfüllt${von&&wz>=j1?' (am '+dTxt(wz)+')':''} und du bist nicht in der ersten Jahreshälfte gegangen. Damit hast du Anspruch auf den vollen Jahresurlaub (§ 4 BUrlG), obwohl du nicht das ganze Jahr da bist.${J>L?' Für den Urlaub über dem gesetzlichen Minimum gilt das auch, wenn der Vertrag keine anteilige Kürzung vorsieht.':''}`
+        :`Du bist das ganze Jahr beschäftigt und die Wartezeit ist erfüllt – voller Jahresurlaub.`;
+    }
+    Z=zVoll;
+    schritte.push(['Voller Jahresurlaub'+(S.zwoelf&&teilJahr&&J>L?' (Vertrag anteilig, mind. gesetzlich)':''),tgT(G)]);
+  }
+  if(Z) schritte.push(['Zusatzurlaub Schwerbehinderung'+(teilGrund?' anteilig':''),'+ '+tgT(Z)]);
+  let anspruch=G+Z, abzug=0;
+  if(S.vorher>0){ const deckel=Math.max(0,J+zVoll-S.vorher); if(deckel<anspruch){abzug=anspruch-deckel; anspruch=deckel;} schritte.push(['Beim früheren Arbeitgeber schon bekommen (§ 6 BUrlG)',abzug?'− '+tgT(abzug):'keine Kürzung']); }
+  const verfuegbar=anspruch+(S.uebertrag||0);
+  if(S.uebertrag>0) schritte.push(['Aus dem Vorjahr','+ '+tgT(S.uebertrag)]);
+  if(S.genommen>0) schritte.push(['Schon genommen oder geplant','− '+tgT(S.genommen)]);
+  const rest=verfuegbar-(S.genommen||0);
+  const bruch=[G,Z].some(x=>Math.abs(x-Math.round(x))>1e-6);
+  return {jahr,n,L,V,J,G,Z,anspruch,verfuegbar,rest,grund,schritte,teil:!!teilGrund,teilGrund,m,wz,von,bis,unter:V>0&&V<L-1e-9,bruch};
+}
+function aupd(){
+  const r=rechneAnspruch(A), box=document.getElementById('ares');
+  aktuell={seite:'anspruch',S:A,titel:'Mein Urlaubsanspruch'};
+  if(r.fehler){ box.innerHTML=`<div class="answer warn"><div class="lbl">Bitte prüfen</div><div class="say">${esc(r.fehler)}</div></div>`; return; }
+  const say=`Dir stehen ${r.jahr} <b>${tgT(r.anspruch)}</b> Urlaub zu`+(A.genommen>0||A.uebertrag>0?` – davon sind noch <b>${tgT(Math.max(r.rest,0))}</b> offen.`:'.');
+  const tips=[];
+  if(r.unter) tips.push(`Dein Vertrag (${tg(r.V)} Tage) liegt unter dem gesetzlichen Minimum von ${tg(r.L)} Tagen. Der gesetzliche Mindesturlaub gilt trotzdem – gerechnet ist mit ${tg(r.L)}.`);
+  if(r.bruch) tips.push('Der angebrochene Tag steht dir zu und wird nicht abgerundet – meist gibt es ihn stundenweise. Nur beim anteiligen Urlaub werden Bruchteile ab einem halben Tag auf einen ganzen Tag aufgerundet.');
+  if(r.rest<0) tips.push(`Du hast ${tgT(-r.rest)} mehr genommen, als dir zustehen. Gehst du in der ersten Jahreshälfte und hattest den Urlaub schon bekommen, darf der Arbeitgeber das gezahlte Urlaubsentgelt nicht zurückfordern (§ 5 Abs. 3 BUrlG).`);
+  if(r.teilGrund==='a') tips.push(`Dieser anteilige Urlaub darf auf deinen Wunsch komplett ins nächste Jahr wandern (§ 7 Abs. 3 Satz 4 BUrlG) – sag es dem Arbeitgeber am besten schriftlich.`);
+  if(r.von&&r.wz&&r.wz.getFullYear()===r.jahr&&!r.teil&&r.wz.getMonth()===11&&r.wz.getDate()===31) tips.push('Grenzfall: Deine Wartezeit endet genau am 31.12. Nach herrschender Meinung entsteht damit der volle Jahresurlaub – manche Arbeitgeber rechnen hier anteilig.');
+  if(r.bis&&r.rest>0) tips.push(`Kannst du den Resturlaub bis zum letzten Arbeitstag nicht mehr nehmen, muss er ausbezahlt werden (§ 7 Abs. 4 BUrlG).`);
+  if(r.n<5&&!r.unter) tips.push(`Wichtig bei Teilzeit und Minijob: Ein Urlaubstag ist ein Arbeitstag von dir. Mit ${tg(r.anspruch)} ${Math.abs(r.anspruch)===1?'Tag':'Tagen'} bist du genauso viele Wochen frei wie Vollzeitkräfte mit ihrem Urlaub.`);
+  const wochen=r.anspruch/r.n;
+  const more=`${esc(r.grund)} Das sind gut ${tg(Math.floor(wochen*10)/10)} Wochen frei.`;
+  const copy=`Urlaubsanspruch ${r.jahr}: ${tgT(r.anspruch)}`+(A.genommen>0||A.uebertrag>0?`, offen: ${tgT(r.rest)}`:'')+`. `+r.schritte.map(s=>s[0]+': '+s[1]).join('; ')+'. '+r.grund;
+  const weiter=r.rest>0?(r.bis?`<a class="btn ghost" href="#geld?rest=${encodeURIComponent(String(Math.round(r.rest*100)/100))}&tage=${r.n}">Was ist der Rest in Euro wert?</a>`:`<a class="btn ghost" href="#rest?rest=${encodeURIComponent(String(Math.round(r.rest*100)/100))}&jahr=${r.jahr}&teil=${r.teilGrund==='a'?1:0}">Verfällt mein Rest?</a>`):'';
+  box.innerHTML=antwortBox(r.rest<0?'warn':'ok','Dein Anspruch',say,more,liste(r.schritte.concat([['Offen',tgT(r.rest)]])),tips,copy,
+   `Rechnung: gesetzlicher Mindesturlaub 24 Werktage (Jugendliche 25–30) × deine Arbeitstage ÷ 6 (§ 3 BUrlG, § 19 JArbSchG). Vertragsurlaub × deine Arbeitstage ÷ Tage, für die er gilt. Voller Anspruch nach 6 Monaten Wartezeit (§ 4), sonst bzw. bei Ausscheiden bis 30.6. ein Zwölftel je vollem Monat, Bruchteile ab ½ Tag aufgerundet (§ 5). Schwerbehinderte: eine Arbeitswoche mehr (§ 208 SGB IX).`,weiter);
+  hashSetzen('anspruch',A);
+}
+
+// ================= 2) Resturlaub: verfällt er? =================
+const R={rest:5,jahr:JAHR,hinweis:'unklar',grund:'kein',teil:0};
+const HINWEIS=[['ja','Ja, schriftlich'],['nein','Nein'],['unklar','Weiß nicht']];
+const GRUND=[['kein','Nein, einfach nicht genommen'],['betrieb','Betrieb ließ es nicht zu'],['person','Persönliche Gründe'],['krank','Ich war krank']];
+function rest(p){
+  vorbelegen(R,p);
+  h(`<h2>Verfällt mein Resturlaub?</h2>
+  <div class="fields">
+   ${feld('rr','Offene Urlaubstage','number',R.rest,'min="0" max="200" step="0.5" inputmode="decimal"')}
+   ${feld('rj','aus dem Urlaubsjahr','number',R.jahr,'min="2000" max="2100" inputmode="numeric"')}
+  </div>
+  <div class="step">Hat dein Arbeitgeber dich in diesem Jahr schriftlich auf die offenen Tage hingewiesen und gesagt, dass sie sonst verfallen?</div>${pills('rh',HINWEIS,R.hinweis)}
+  <div class="step">Gab es einen Grund, warum du die Tage nicht nehmen konntest?</div>${pills('rg',GRUND,R.grund)}
+  <div class="step">Erst in der zweiten Jahreshälfte angefangen (anteiliger Urlaub)?</div>${pills('rt',[[0,'Nein'],[1,'Ja']],R.teil)}
+  <div id="rres"></div>`);
+  const upd=()=>{R.rest=num(rr.value);R.jahr=num(rj.value);rupd();};
+  [rr,rj].forEach(el=>el.addEventListener('input',upd));
+  pillGroup('rh',v=>{R.hinweis=v;rupd()}); pillGroup('rg',v=>{R.grund=v;rupd()}); pillGroup('rt',v=>{R.teil=num(v);rupd()});
+  rupd();
+}
+function arbeitstageBis(ende){ // Mo–Fr ab heute bis ende, ohne 1. und 2. Weihnachtstag und Neujahr
+  let n=0; const d=new Date(HEUTE.getFullYear(),HEUTE.getMonth(),HEUTE.getDate());
+  while(d<=ende){ const w=d.getDay(), md=(d.getMonth()+1)*100+d.getDate(); if(w>0&&w<6&&md!==1225&&md!==1226&&md!==101) n++; d.setDate(d.getDate()+1); } return n;
+}
+function rupd(){
+  const jahr=Math.round(clamp(R.jahr||JAHR,2000,2100)), t=tgT(R.rest), box=document.getElementById('rres');
+  const ende=new Date(jahr,11,31), maerz=new Date(jahr+1,2,31), vorbei=HEUTE>ende;
+  let cls='ok', lbl='Ergebnis', say, more, tips=[];
+  if(R.rest<=0){ say='Kein Resturlaub – nichts kann verfallen.'; more=''; }
+  else if(R.hinweis!=='ja'){
+    say=`Deine ${t} verfallen nicht am 31.12.${jahr}.`;
+    more=`Urlaub verfällt nur, wenn der Arbeitgeber dich rechtzeitig und klar auf die offenen Tage und den drohenden Verfall hingewiesen hat (Bundesarbeitsgericht, 19.2.2019, 9 AZR 423/16).${R.hinweis==='unklar'?' Ob es einen solchen Hinweis gab, kannst du in Mails, Lohnzetteln oder Aushängen nachsehen – ein allgemeiner Satz im Arbeitsvertrag reicht nicht.':''} Ohne Hinweis beginnt auch keine Verjährung (BAG, 20.12.2022, 9 AZR 266/20).`;
+    tips.push('Trotzdem: Nimm die Tage bald – lass dir den Stand am besten schriftlich bestätigen, dann gibt es später keinen Streit.');
+    if(R.grund==='krank') tips.push('Warst du das ganze Jahr bis Ende März des Folgejahres durchgehend krank, verfällt der gesetzliche Urlaub auch ohne Hinweis spätestens 15 Monate nach Jahresende – also am '+dTxt(new Date(jahr+2,2,31))+'.');
+  }
+  else if(R.teil){ say=`Deine ${t} kannst du ins Jahr ${jahr+1} mitnehmen.`; more=`Anteiliger Urlaub, weil du erst in der zweiten Jahreshälfte angefangen hast, wird auf deinen Wunsch komplett ins nächste Jahr übertragen und kann das ganze Jahr ${jahr+1} genommen werden (§ 7 Abs. 3 Satz 4 BUrlG). Sag es dem Arbeitgeber vor dem 31.12. schriftlich.`; }
+  else if(R.grund==='kein'){
+    cls='warn'; lbl='Achtung';
+    say=vorbei?`Deine ${t} sind mit dem 31.12.${jahr} verfallen.`:`Deine ${t} verfallen am 31.12.${jahr} – jetzt beantragen.`;
+    const at=vorbei?0:arbeitstageBis(ende);
+    more=`Dein Arbeitgeber hat dich hingewiesen und es gab keinen Grund für eine Übertragung. Dann endet der Urlaub mit dem Jahr (§ 7 Abs. 3 BUrlG).`+(vorbei?'':` Bis Silvester bleiben noch etwa ${at} Arbeitstage (Montag bis Freitag, ohne Weihnachtsfeiertage; regionale Feiertage nicht abgezogen).`);
+    tips.push('Urlaubsantrag am besten schriftlich stellen. Lehnt der Arbeitgeber ab, weil im Betrieb zu viel los ist, wird der Urlaub automatisch bis 31. März übertragen.');
+    tips.push('Tarifverträge (z. B. im öffentlichen Dienst bis 31. Mai) oder Betriebsvereinbarungen erlauben oft längere Fristen – nachsehen lohnt sich.');
+  }
+  else if(R.grund==='krank'){
+    say=`Deine ${t} werden ins Jahr ${jahr+1} übertragen.`;
+    more=`Konntest du den Urlaub wegen Krankheit nicht nehmen, geht er automatisch ins nächste Jahr über und muss bis ${dTxt(maerz)} genommen werden – sobald du wieder gesund bist. Bist du durchgehend krank, verfällt der gesetzliche Urlaub erst 15 Monate nach Jahresende, am ${dTxt(new Date(jahr+2,2,31))}.`;
+  }
+  else{
+    say=`Deine ${t} werden bis ${dTxt(maerz)} übertragen.`;
+    more=`${R.grund==='betrieb'?'Dringende betriebliche Gründe':'Gründe in deiner Person'} erlauben die Übertragung ins nächste Jahr – ein Antrag ist nicht nötig. Der Urlaub muss aber bis 31. März genommen werden (§ 7 Abs. 3 BUrlG), sonst verfällt er, wenn dein Arbeitgeber dich auch darauf hingewiesen hat.`;
+  }
+  const mail=`Betreff: Mein Resturlaub aus ${jahr}\n\nHallo …,\n\nnach meiner Rechnung habe ich aus ${jahr} noch ${t} Urlaub offen. Können Sie mir den Stand bitte kurz bestätigen und mir sagen, bis wann ich die Tage nehmen kann?\n\nIch würde gern folgende Tage beantragen: …\n\nViele Grüße\n…`;
+  const inhalt=R.rest>0?`<div class="mail">${esc(mail)}</div>`:'';
+  aktuell={seite:'rest',S:R,titel:'Verfällt mein Resturlaub?'};
+  const copy=say.replace(/<[^>]+>/g,'')+' '+more;
+  box.innerHTML=antwortBox(cls,lbl,say,more,inhalt,tips,copy,'Grundlage: § 7 Abs. 3 BUrlG; Hinweispflicht des Arbeitgebers nach BAG 19.2.2019 (9 AZR 423/16), Verjährung nach BAG 20.12.2022 (9 AZR 266/20), Verfall bei Langzeiterkrankung nach 15 Monaten (BAG 7.8.2012, 9 AZR 353/10).',
+    R.rest>0?`<button class="btn ghost" data-mail>Mail-Text kopieren</button>`:'');
+  hashSetzen('rest',R);
+}
+
+// ================= 3) Urlaubsabgeltung =================
+const G={rest:5,brutto:3000,tage:5,zuschlag:0};
+function geld(p){
+  vorbelegen(G,p);
+  h(`<h2>Wie viel Geld bekomme ich für offenen Urlaub?</h2>
+  <div class="fields">
+   ${feld('gr','Offene Urlaubstage','number',G.rest,'min="0" max="200" step="0.5" inputmode="decimal"')}
+   ${feld('gb','Brutto pro Monat (Durchschnitt der letzten 3 Monate)','number',G.brutto,'min="0" max="100000" step="10" inputmode="decimal"')}
+   ${feld('gt','Arbeitstage pro Woche','number',G.tage,'min="0.5" max="6" step="0.5" inputmode="decimal"')}
+   ${feld('gz','Zuschläge in den letzten 13 Wochen, gesamt (ohne Überstunden)','number',G.zuschlag,'min="0" max="100000" step="10" inputmode="decimal"')}
+  </div>
+  <div id="gres"></div>`);
+  const upd=()=>{G.rest=num(gr.value);G.brutto=num(gb.value);G.tage=num(gt.value);G.zuschlag=num(gz.value);gupd();};
+  [gr,gb,gt,gz].forEach(el=>el.addEventListener('input',upd)); gupd();
+}
+function gupd(){
+  const n=clamp(G.tage||5,0.5,6), tag=(G.brutto*3+G.zuschlag)/(13*n), summe=tag*Math.max(G.rest,0), box=document.getElementById('gres');
+  const say=`Für ${tgT(G.rest)} bekommst du etwa <b>${eur(summe)}</b> brutto.`;
+  const more=`Ein Urlaubstag ist bei dir rund ${eur(tag)} brutto wert: der Verdienst der letzten 13 Wochen geteilt durch deine Arbeitstage in dieser Zeit (§ 11 BUrlG).`;
+  const tips=['Ausbezahlt wird Urlaub nur, wenn das Arbeitsverhältnis endet und du ihn vorher nicht mehr nehmen kannst (§ 7 Abs. 4 BUrlG). Solange du bleibst, darf der gesetzliche Mindesturlaub nicht gegen Geld getauscht werden.',
+    'Die Abgeltung wird wie Lohn versteuert und verbeitragt – netto bleibt je nach Steuerklasse etwa die Hälfte bis zwei Drittel.',
+    'Überstundenvergütung zählt nicht mit; regelmäßige Zuschläge (Nacht, Sonntag) und Provisionen schon. Bei Minijobs zählt die Abgeltung zum Verdienst des Monats, in dem sie gezahlt wird.'];
+  aktuell={seite:'geld',S:G,titel:'Urlaubsabgeltung'};
+  const copy=`Urlaubsabgeltung: ${tgT(G.rest)} × ${eur(tag)} = ${eur(summe)} brutto (3 × ${eur(G.brutto)}${G.zuschlag?' + '+eur(G.zuschlag)+' Zuschläge':''} ÷ (13 Wochen × ${tg(n)} Tage)).`;
+  box.innerHTML=antwortBox('ok','Ergebnis',say,more,liste([['Verdienst 13 Wochen',eur(G.brutto*3+G.zuschlag)],['Arbeitstage in 13 Wochen',tg(13*n)],['Wert je Urlaubstag',eur(tag)],['× offene Tage',tg(G.rest)],['Abgeltung brutto',eur(summe)]]),tips,copy,
+   'Rechnung: (3 × Monatsbrutto + Zuschläge der letzten 13 Wochen) ÷ (13 × Arbeitstage pro Woche) × offene Urlaubstage. Bei schwankendem Lohn den Durchschnitt der letzten drei Monate eintragen.');
+  hashSetzen('geld',G);
+}
+
+// ================= Navigation =================
+const SEITEN={anspruch,rest,geld};
+function route(){
+  const {seite,p}=hashTeile();
+  document.getElementById('back').classList.toggle('hide',!SEITEN[seite]);
+  (SEITEN[seite]||start)(p);
+}
+document.getElementById('home').onclick=()=>{history.replaceState(null,'',location.pathname+location.search);route();};
+document.getElementById('back').onclick=()=>{history.replaceState(null,'',location.pathname+location.search);route();};
+window.addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>
